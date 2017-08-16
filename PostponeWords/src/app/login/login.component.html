@@ -1,0 +1,24 @@
+﻿<div class="container">
+  <h1>Registration</h1>
+  <form (ngSubmit)="onSubmit(form_data)" #form_data="ngForm">      
+   <div class="form-group">
+     <label for="login"> <input type="radio" name="account" value="login" [(ngModel)]="login" />Login</label>      
+      <label for="login"> <input type="radio" name="account" value="register" [(ngModel)]="login"/>Register</label>      
+    </div>
+    
+    <div  class="form-group">
+      <label for="name">Email</label>
+      <input type="text" class="form-control" name="email" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="name">Password</label>
+      <input type="password" class="form-control" name="password" ngModel  required>
+    </div>
+    <div class="form-group">
+      <label for="name">Confirm Password</label>
+      <input type="password" class="form-control" name="password-confirm" ngModel required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeWords.deps.json
+D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeWords.runtimeconfig.json
+D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeWords.runtimeconfig.dev.json
+D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeWords.dll
+D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeWords.pdb
+D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.AssemblyInfo.cs
+D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.dll
+D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.pdb
