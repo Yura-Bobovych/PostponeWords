@@ -18,15 +18,15 @@ namespace PostponeWords.Data.Models
       {
         entity.Property(e => e.Email)
                   .IsRequired()
-                  .HasColumnType("nchar(50)");
+                  .HasColumnType("varchar(50)");
 
         entity.Property(e => e.Hesh)
                   .IsRequired()
-                  .HasColumnType("nchar(50)");
+                  .HasColumnType("varchar(50)");
 
         entity.Property(e => e.Salt)
                   .IsRequired()
-                  .HasColumnType("nchar(50)");
+                  .HasColumnType("varchar(50)");
       });
     }
   }

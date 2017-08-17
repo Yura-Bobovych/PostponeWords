@@ -8,8 +8,9 @@ namespace PostponeWords.Data
 {
     public interface IUserWorker 
     {
-    bool CreateUser(string email, string password);
+    User CreateUser(string email, string password);
+    User FindByEmail(string email);
     bool UserExist(string email);
-    bool VerifyUser(string email, string password);
+    bool CheckPassword(User user,string password);
   }
 }

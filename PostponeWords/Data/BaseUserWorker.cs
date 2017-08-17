@@ -6,49 +6,56 @@ using PostponeWords.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace PostponeWords.Data
 {
   public class BaseUserWorker : IUserWorker
   {
     #region properties
-    private readonly PostponeWordsContext context;
-    private const string staticHeshParam = "285c593422dd471c37b46b4c658686131b3aa5a8"; // pass hesh= sha1(sha1(pass+salt+staticParam))
-    public BaseUserWorker(PostponeWordsContext context)
+    private readonly PostponeWordsContext Сontext;
+    private readonly AppSettings Сonfiguration;
+    // pass hesh= sha1(sha1(pass+salt+configuration["staticParam"]))
+    public BaseUserWorker(PostponeWordsContext context, IOptions<AppSettings> configuration)
     {
-      this.context = context;
+      Сontext = context;
+      Сonfiguration = configuration.Value;
     }
     #endregion
     #region public 
-    public bool CreateUser(string email, string password)
+    public User CreateUser(string email, string password)
     {
-      if (UserExist(email))
+      if (!UserExist(email))
       {
         User user = new User();
         user.Email = email;
         user.Salt = GetSalt(password);
         user.Hesh = GetPasswordHesh(password, user.Salt);
-        context.User.Add(user);
-        context.SaveChanges();
-        return true;
+        Сontext.User.Add(user);
+        Сontext.SaveChanges();
+        return user;
       }
-      return false;
+      return null;
     }
     public bool UserExist(string email)
-    {
-
-      if (context.User.Where(u => u.Email == email) == null)
-      { return false; }
-      return true;
+    {      
+      if (Сontext.User.Where(u => u.Email == email).FirstOrDefault() != null)
+      { return true; }
+      return false;
     }
-    public bool VerifyUser(string email, string password)
-    {
-      User user = context.User.Where(u => u.Email == email).First();
+    public bool CheckPassword(User user,string password)
+    {           
       if (user != null)
       {
-        if (user.Hesh == GetPasswordHesh(password, user.Salt)) { return true; }
+        if (user.Hesh == GetPasswordHesh(password, user.Salt)) {       
+          return true; }
       }
       return false;
+    }
+    public User FindByEmail(string email)
+    {
+      return Сontext.User.Where(u => u.Email == email).FirstOrDefault();
     }
     #endregion
     #region private
@@ -72,10 +79,12 @@ namespace PostponeWords.Data
     }
     private string GetPasswordHesh(string passsword, string salt)
     {
+      
       string result = "";
       using (SHA1 sha1 = SHA1.Create())
       {
-        var hash = sha1.ComputeHash(sha1.ComputeHash(Encoding.UTF8.GetBytes(passsword + salt + staticHeshParam)));
+        
+        var hash = sha1.ComputeHash(sha1.ComputeHash(Encoding.UTF8.GetBytes(passsword + salt + Сonfiguration.StaticHesh )));
         var sb = new StringBuilder(hash.Length * 2);
 
         foreach (byte b in hash)
