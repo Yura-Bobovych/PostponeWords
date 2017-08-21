@@ -7,20 +7,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import { AccountService } from "./account.service"
-import { AuthGuard } from "./auth-guard.service";
+import { AccountService } from "./services/account.service"
+import { AuthGuard } from "./services/auth-guard.service";
+import { SearchComponent } from './search/search.component';
+import { IndexComponent } from './index/index.component';
+import { WordService} from './services/word.service'
 
 
 const appRoutes: Routes = [
-	{ path: '', component: MainComponent, canActivate: [AuthGuard] },
+	{ path: '', component: IndexComponent},
 	{ path: 'login', component: LoginComponent },
+	{ path: 'main', component: MainComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({
    declarations: [
       AppComponent,
       LoginComponent,
-      MainComponent
+      MainComponent,
+      SearchComponent,
+      IndexComponent
    ],
    imports: [
       BrowserModule,
@@ -31,7 +37,7 @@ const appRoutes: Routes = [
 		   { enableTracing: true } 
 	   )
    ],
-   providers: [AccountService, AuthGuard],
+   providers: [AccountService, AuthGuard, WordService],
    bootstrap: [AppComponent]
 })
 export class AppModule { }

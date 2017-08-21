@@ -6,3 +6,4 @@ D:\projects\CSharp\PostponeWords\PostponeWords\bin\Debug\netcoreapp1.1\PostponeW
 D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.AssemblyInfo.cs
 D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.dll
 D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.pdb
+D:\projects\CSharp\PostponeWords\PostponeWords\obj\Debug\netcoreapp1.1\PostponeWords.csprojResolveAssemblyReference.cache

@@ -16,6 +16,8 @@ namespace PostponeWords.Data
     #region properties
     private readonly PostponeWordsContext Сontext;
     private readonly AppSettings Сonfiguration;
+    #endregion
+    #region constractor
     // pass hesh= sha1(sha1(pass+salt+configuration["staticParam"]))
     public BaseUserWorker(PostponeWordsContext context, IOptions<AppSettings> configuration)
     {
@@ -39,17 +41,19 @@ namespace PostponeWords.Data
       return null;
     }
     public bool UserExist(string email)
-    {      
+    {
       if (Сontext.User.Where(u => u.Email == email).FirstOrDefault() != null)
       { return true; }
       return false;
     }
-    public bool CheckPassword(User user,string password)
-    {           
+    public bool CheckPassword(User user, string password)
+    {
       if (user != null)
       {
-        if (user.Hesh == GetPasswordHesh(password, user.Salt)) {       
-          return true; }
+        if (user.Hesh == GetPasswordHesh(password, user.Salt))
+        {
+          return true;
+        }
       }
       return false;
     }
@@ -79,12 +83,12 @@ namespace PostponeWords.Data
     }
     private string GetPasswordHesh(string passsword, string salt)
     {
-      
+
       string result = "";
       using (SHA1 sha1 = SHA1.Create())
       {
-        
-        var hash = sha1.ComputeHash(sha1.ComputeHash(Encoding.UTF8.GetBytes(passsword + salt + Сonfiguration.StaticHesh )));
+
+        var hash = sha1.ComputeHash(sha1.ComputeHash(Encoding.UTF8.GetBytes(passsword + salt + Сonfiguration.StaticHesh)));
         var sb = new StringBuilder(hash.Length * 2);
 
         foreach (byte b in hash)

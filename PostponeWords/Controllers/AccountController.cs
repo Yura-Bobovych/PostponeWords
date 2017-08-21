@@ -27,7 +27,7 @@ namespace PostponeWords.Controllers
       this.jwtOptions = jwtOptions.Value;
       this.userWorker = userWorker;
     }
-    //Register
+    
     [HttpPost]
     public void Register([FromBody]UserViewModel user)
     {

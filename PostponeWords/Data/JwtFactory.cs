@@ -13,18 +13,21 @@ namespace PostponeWords.Data
   public class JwtFactory: IJwtFactory
   {
     private readonly JwtIssuerOptions _jwtOptions;
+    private readonly AppSettings Сonfiguration;
 
-    public JwtFactory(IOptions<JwtIssuerOptions> jwtOptions)
+    public JwtFactory(IOptions<JwtIssuerOptions> jwtOptions, IOptions<AppSettings> configuration)
     {
       _jwtOptions = jwtOptions.Value;
+      Сonfiguration = configuration.Value;
     }
     public ClaimsIdentity GenerateClaimsIdentity(string userName, int id)
-    {
+    {      
       return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
       {
-                new Claim("id", id.ToString()),
-                new Claim("rol", "api/access")
+                new Claim(Сonfiguration.JwtClaimIdentifiers.Id, id.ToString()),
+                new Claim(Сonfiguration.JwtClaimIdentifiers.Rol, Сonfiguration.JwtClaims.BaseUser)
             });
+     
     }
     public async Task<string> GenerateEncodedToken(string email, ClaimsIdentity identity)
     {
